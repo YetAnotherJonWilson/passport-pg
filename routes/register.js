@@ -9,15 +9,14 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/', function(req,res,next) {
-  Users.create(req.body, function (err, post) {
+  Users.create(req.body.username, req.body.password, function(err) {
     if (err) {
-      next(err);
+      console.log(err);
+      res.sendStatus(500);
     } else {
-      // we registered the user, but they haven't logged in yet.
-      // redirect them to the login page
       res.redirect('/');
     }
-  })
+  });
 });
 
 module.exports = router;

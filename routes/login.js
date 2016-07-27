@@ -3,22 +3,16 @@ var router = express.Router();
 var passport = require('passport');
 var path = require('path');
 
-
-router.get("/", function(req,res,next){
-  res.sendFile(path.resolve(__dirname, '../public/views/login.html'));
+router.get('/', function(req, res) {
+  res.send(req.isAuthenticated());
 });
-
 
 router.post('/',
   passport.authenticate('local', {
-    successRedirect: '/views/index.html',
+    successRedirect: '/views/success.html',
     failureRedirect: '/views/failure.html'
   })
 );
-
-router.get('/', function(req, res, next) {
-  res.json(req.isAuthenticated());
-});
 
 
 module.exports = router;
